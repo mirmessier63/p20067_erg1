@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     participants = ""
     participants.concat(Current.user.email_address)
     participants.concat(",")
-    if users_to_add.size > 1
+    if users_to_add.size > 0
       while i < users_to_add.size do
         participants.concat(users_to_add["#{i}"])
         participants.concat(",")

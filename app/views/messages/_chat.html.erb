@@ -1,0 +1,49 @@
+<div class="openChat">
+  <form>
+    <h1>Chat</h1>
+    <div id="existingChats">
+      <button type="button" class="new_conversation" onclick="newConversation()">New Conversation</button>
+      <h3>Your chats:</h3>
+      <% @headlines.each do |m| %>
+        <button type="button" onclick="getChat(<%= m.chat_id %>)"><%= "#{m.chat_name}" %></button>
+      <% end %>
+    </div>
+    <div class = "newChat" id = "newChat">
+      <h3>Create a new Chat</h3>
+      <label for="chatName">Chat Name</label>
+      <input type="text" id="chatName" name="chatName" required>
+      <ul class="selectedContactList">
+        <% @contacts1.each do |contact| %>
+          <li>
+            <label for="<%= contact.user2_email %>"><%= "#{contact.user2_email}" %><input type="checkbox" id="<%= contact.user2_email %>" name="<%= contact.user2_email %>" value="<%= contact.user2_email %>"></label>
+          </li>
+        <% end %>
+        <% @contacts2.each do |contact| %>
+          <li>
+            <label for="<%= contact.user1_email %>"><%= "#{contact.user1_email}" %><input type="checkbox" id="<%= contact.user1_email %>" name="<%= contact.user1_email %>" value="<%= contact.user1_email %>"></label>
+          </li>
+        <% end %>
+      </ul>
+      <button type="button" onclick="startConversation()">Start conversation</button>
+    </div>
+    <div class = "chatScreen" id = "chatScreen">
+      <button type="button" class="backButton" id="backButton">Back</button>
+      <button type="button" class="refreshButton" id="refreshButton">Refresh</button>
+      <p style="visibility: hidden" id="chatId"></p>
+      <h3 id = "chatNameText"></h3>
+      <div class="messagesContainer" id="messagesContainer">
+
+      </div>
+
+      <div class="sendContainer" id="sendContainer">
+        <input type="text" id="text" name="text">
+        <button type="button" onclick="sendMessage()" class="sendButton">Send</button>
+      </div>
+      <div class="createTextContainer" id="createTextContainer">
+        <input type="text" id="createText" name="createText">
+        <button type="button" class="createButton">Send</button>
+      </div>
+    </div>
+
+  </form>
+</div>

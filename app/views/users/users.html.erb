@@ -1,0 +1,44 @@
+<%= link_to "Go Back", home_path %>
+
+<% @notifications.each do |n| %>
+  <h2><%= n.message %>, <%= link_to "OK", delete_notification_path(:n_id => n.id)  %></h2>
+<% end %>
+
+<%= stylesheet_link_tag "chat"%>
+
+<button class="openChatBtn">Chat</button>
+
+<%= javascript_include_tag "chat" %>
+
+<%= render partial: "messages/chat" %>
+
+<% @users.each do |user|%>
+  <p><%= "#{user.firstname} #{user.lastname}"%> <%= if Current.user.email_address != user.email_address and  !Contact.where(user1_email: Current.user.email_address).where(user2_email: user.email_address).exists?
+                                                       link_to "Friend Request", friend_request_path(req: user.email_address) end%></p>
+<% end %>
+</br>
+</br>
+<p>Friend Requests:</p>
+
+<% @f_requests.each do |request| %>
+  <p><%="User: #{request.user1_email}" %> <%= link_to "Accept", accept_path(req: request.user1_email) %> <%= link_to "Reject", reject_path(req: request.user1_email) %></p>
+<% end %>
+
+</br>
+</br>
+
+<p>Friends:</p>
+
+<% @friends_s.each do |friend| %>
+  <p><%= if Current.user.email_address == friend.user1_email
+           "#{friend.user2_email}"
+  else
+    "#{friend.user1_email}" end%>
+<% end %>
+<% @friends_r.each do |friend| %>
+  <p><%= if Current.user.email_address == friend.user1_email
+           "#{friend.user2_email}"
+         else
+           "#{friend.user1_email}" end%>
+<% end %>
+

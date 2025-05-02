@@ -1,0 +1,27 @@
+<h1>Projects Discussion</h1>
+<%= link_to "Go Back", forum_path %>
+<br>
+
+<% @notifications.each do |n| %>
+  <h2><%= n.message %>, <%= link_to "OK", delete_notification_path(:n_id => n.id)  %></h2>
+<% end %>
+
+<%= stylesheet_link_tag "chat"%>
+
+<button class="openChatBtn">Chat</button>
+
+<%= javascript_include_tag "chat" %>
+
+<%= render partial: "messages/chat" %>
+
+<div class="row">
+  <%= render "forum/components/create_thread" %>
+</div>
+
+<h2>Posts:</h2>
+
+<div class="row">
+  <% @threads.each do |thread|%>
+    <h3><%= link_to "#{thread.topic_id} | #{thread.post_text}", pd_get_thread_path(thread.thread_id) %></h3>
+  <% end %>
+</div>

@@ -1,0 +1,18 @@
+<%= form_with model: Post.new do |form| %>
+  <div>
+    <br>
+    <%= form.label :post_text, "Thread name:" %>
+    <%= form.text_field :post_text %>
+    <br>
+    <%= form.label :topic_id, "Topic:" %>
+    <%= form.select :topic_id, @topics %>
+  </div>
+  <div>
+    <%= form.label :text, "Text:"%>
+    <%= form.text_field :text %>
+    <br>
+    <%= hidden_field_tag "post[type]", "thread" %>
+    <%= hidden_field_tag "post[category_id]", @category %>
+  </div>
+  <%= form.submit %>
+<% end %>

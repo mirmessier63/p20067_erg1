@@ -1,0 +1,20 @@
+<h1>Home page. Welcome <%= Current.user.firstname %> <%= Current.user.lastname %>.</h1>
+</br>
+<%= link_to "Forums", forum_path%>
+</br>
+<%= link_to "Users", users_path%>
+</br>
+<%= link_to "Logout", session_path, method: :delete, data: {turbo_method: :delete} %>
+
+<% @notifications.each do |n| %>
+  <h2><%= n.message %>, <%= link_to "OK", delete_notification_path(:n_id => n.id)  %></h2>
+<% end %>
+
+<%= stylesheet_link_tag "chat"%>
+
+<button class="openChatBtn">Chat</button>
+
+<%= javascript_include_tag "chat" %>
+
+<%= render partial: "messages/chat" %>
+

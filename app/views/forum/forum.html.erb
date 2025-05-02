@@ -1,0 +1,28 @@
+<h1>Forum Page</h1>
+
+<%= link_to "Go Back", home_path %>
+
+<% @notifications.each do |n| %>
+  <h2><%= n.message %>, <%= link_to "OK", delete_notification_path(:n_id => n.id)  %></h2>
+<% end %>
+
+<%= stylesheet_link_tag "chat"%>
+
+<button class="openChatBtn">Chat</button>
+
+<%= javascript_include_tag "chat" %>
+
+<%= render partial: "messages/chat" %>
+
+</br>
+</br>
+
+<div><%= link_to "Course Discussion", course_discussion_path %></div>
+<div><%= link_to "Projects Discussion", project_discussion_path %></div>
+<div><%= link_to "Hobbies", hobbies_path %></div>
+
+<%= form_with url: "forum/search", method: :get do |form| %>
+  <%= form.label :query, "Search for thread:" %>
+  <%= form.search_field :query %>
+  <%= form.submit "Search" %>
+<% end %>

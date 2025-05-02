@@ -1,0 +1,44 @@
+<%= @post_text %>
+<%= @thread_id %>
+<%= @topic_id %>
+<%= @category_id %>
+
+<% @notifications.each do |n| %>
+  <h2><%= n.message %>, <%= link_to "OK", delete_notification_path(:n_id => n.id)  %></h2>
+<% end %>
+
+<%= stylesheet_link_tag "chat"%>
+
+<button class="openChatBtn">Chat</button>
+
+<%= javascript_include_tag "chat" %>
+
+<%= render partial: "messages/chat" %>
+
+<div class="row">
+  <% @posts.each do |post|%>
+    <% @thread_id = post.thread_id %>
+    <% @topic_id = post.topic_id %>
+    <% @category_id = post.category_id %>
+    <h3><%= post.user_email %></h3>
+    <h3><%= @post_text = post.post_text %></h3>
+    <h3><%= post.created_at %></h3>
+    <h3><%= post.text %></h3>
+    </br>
+  <% end %>
+</div>
+
+<%= form_with model: Post.new do |form| %>
+  <div>
+    <%= form.label :text, "Text:"%>
+    <%= form.text_field :text %>
+
+    <%= hidden_field_tag "post[type]", "comment" %>
+    <%= hidden_field_tag "post[post_text]", @post_text %>
+    <%= hidden_field_tag "post[thread_id]", @thread_id %>
+    <%= hidden_field_tag "post[topic_id]", @topic_id %>
+    <%= hidden_field_tag "post[category_id]", @category_id %>
+
+  </div>
+  <%= form.submit %>
+<% end %>

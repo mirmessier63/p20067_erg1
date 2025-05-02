@@ -1,0 +1,27 @@
+<%= link_to "Go Back", forum_path %>
+
+<% @notifications.each do |n| %>
+  <h2><%= n.message %>, <%= link_to "OK", delete_notification_path(:n_id => n.id)  %></h2>
+<% end %>
+
+<%= stylesheet_link_tag "chat"%>
+
+<button class="openChatBtn">Chat</button>
+
+<%= javascript_include_tag "chat" %>
+
+<%= render partial: "messages/chat" %>
+
+<h1>Search results for: <%= @searched %></h1>
+
+<% @search_result.each do |thread| %>
+  <% if thread.category_id == 0 %>
+    <h3><%= link_to "#{thread.topic_id} | #{thread.post_text}", cd_get_thread_path(thread.thread_id) %></h3>
+  <% end %>
+  <% if thread.category_id == 1 %>
+    <h3><%= link_to "#{thread.topic_id} | #{thread.post_text}", cd_get_thread_path(thread.thread_id) %></h3>
+  <% end %>
+  <% if thread.category_id == 2 %>
+    <h3><%= link_to "#{thread.topic_id} | #{thread.post_text}", h_get_thread_path(thread.thread_id) %></h3>
+  <% end %>
+<% end %>

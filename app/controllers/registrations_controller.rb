@@ -32,7 +32,7 @@ class RegistrationsController < ApplicationController
   end
 
   def google_success
-    client_id = Google::Auth::ClientId.from_file('app/assets/client_secret_500209858623-g747vbhpg4vsdnqjjffu2h28i3nql44a.apps.googleusercontent.com.json')
+    client_id = Google::Auth::ClientId.from_file('client_secret_500209858623-g747vbhpg4vsdnqjjffu2h28i3nql44a.apps.googleusercontent.com.json')
     scope = ['https://www.googleapis.com/auth/userinfo.profile']
     token_store = Google::Auth::Stores::RedisTokenStore.new(redis: "redis://localhost:6379")
     authorizer = Google::Auth::WebUserAuthorizer.new(

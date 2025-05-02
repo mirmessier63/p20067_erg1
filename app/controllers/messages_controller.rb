@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
         participants.concat(",")
         i = i + 1
       end
-      @c = Conversation.new(participants: participants, chat_id: (Conversation.last.chat_id + 1), message_id: 0 , chat_name: params[:chatName], sender_email: Current.user.email_address, message: params[:message])
+      @c = Conversation.new(participants: participants, chat_id: (Conversation.maximum("chat_id") + 1), message_id: 0 , chat_name: params[:chatName], sender_email: Current.user.email_address, message: params[:message])
       @c.save
     end
 
